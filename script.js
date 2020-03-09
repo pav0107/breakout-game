@@ -14,17 +14,18 @@ const brickColumnCount = 8;     // The number of bricks on each column
 // Create ball properties
 const ball = {
     x: canvas.width / 2, // to start ball in the middle (horizontally) of the page(paddle)
-    y: canvas.height - 20, // most versions of this game have the ball starting on the paddle, so I've made these the same height.
+    y: canvas.height - 30, // most versions of this game have the ball starting on the paddle, so I've made these nearly the same height.
+                            // they're not exactly the same as the ball gets caught in a loop due to code when the ball hits the paddle
+                            // getting the ball reverse the y-direction.
     radius: 10,
-    speed: 4,
     dx: 4,      // change in x-axis every time the ball is redrawn
     dy: -4      // change in y-axis every time the ball is redrawn (negative values are up by default, and that's what we want.)
 }
 
 // Create paddle properties
 const paddle = {
-    x: canvas.width / 2 - 40,
-    y: canvas.height - 20,
+    x: canvas.width / 2 - 40,       // left-hand side of paddle is half-way across the page minus half the width of the paddle
+    y: canvas.height - 20,          // just off the bottom of the canvas
     w: 80,
     h: 10,
     speed: 8,
@@ -83,7 +84,7 @@ function drawBricks() {
         column.forEach(brick => {
             ctx.beginPath();
             ctx.rect(brick.x, brick.y, brick.w, brick.h);
-            ctx.fillStyle = brick.visible ? '#FBBC04' : 'transparent';
+            ctx.fillStyle = brick.visible ? '#FBBC04' : 'transparent';  // colour of brick normally and transparent for when the brick is struck.
             ctx.fill();
             ctx.closePath();
         })
@@ -155,7 +156,7 @@ function moveBall() {
         ball.x < paddle.x + paddle.w &&   // and the center of the ball < right-hand edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
         {
-        ball.dy = -ball.speed           // reverse the speed of the ball
+        ball.dy = -ball.dy           // reverse the speed of the ball
     }
 
     // Brick collision
@@ -180,14 +181,14 @@ function moveBall() {
 if(ball.y + ball.radius > canvas.height) {
     lives--;
     if(lives === 0) {
-        alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval);
+        alert("GAME OVER");             // create an end to the game if five lives are lost.
+        document.location.reload();     // reload page
+        clearInterval(interval);        // for Chrome to end game
     }
     else {
         //reset ball position
         ball.x =  canvas.width / 2;
-        ball.y = canvas.height - 20;
+        ball.y = canvas.height - 30;
         //reset paddle position
         paddle.x = canvas.width / 2 - 40;
         paddle.y = canvas.height - 20;
@@ -209,7 +210,9 @@ function increaseScore() {
     // if all the bricks are gone, the score divided by the number of bricks won't leave a remainder.
     // that will be the case no matter how many 'rounds' are completed.
         showAllBricks();
-        ball.speed += 4;    // increase the speed of the ball
+
+        ball.dx += 2;       // to create 'levels' once someone completes all the bricks, increase speed of ball
+        ball.dy -= 2;
     }
 }
 
@@ -219,7 +222,7 @@ function increaseScore() {
 // Make all bricks appear
 function showAllBricks() {
     bricks.forEach(column => {
-        column.forEach(brick => (brick.visible = true));
+        column.forEach(brick => (brick.visible = true));    // make all bricks visible again
     });
 }
 
