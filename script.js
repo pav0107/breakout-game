@@ -35,7 +35,7 @@ const paddle = {
 // Create brick properties
 const brickInfo = {
     w: 70,
-    h: 10,
+    h: 15,
     padding: 10,    // creates space around each block, thus between blocks
     offsetX: 45,    // 45px from left edge of canvas
     offsetY: 60,    //60 px from top edge of canvas
@@ -163,8 +163,8 @@ function moveBall() {
     bricks.forEach(column => {
         column.forEach(brick => {
             if(brick.visible) {
-                if(ball.x - ball.radius > brick.x && //left brick side check
-                    ball.x + ball.radius < brick.x + brick.w && // right brick side check
+                if(ball.x + ball.radius > brick.x && //left brick side check
+                    ball.x - ball.radius < brick.x + brick.w && // right brick side check
                     ball.y + ball.radius > brick.y && //top brick side check
                     ball.y - ball.radius < brick.y + brick.h // bottom brick side check)
                 ){
