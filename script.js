@@ -160,7 +160,7 @@ function moveBall() {
                                                 // I added Math.abs to solve problem of ball travelling within paddle if hit at certain angles on the edge.
     }
 //////////////////
-///CODE TO TRY AND SOLVE PROBLEM WITH BALL TRAVELLING ALONG PADDLE WHEN STRUCK AT CERTAIN ANGLES NEAR THE CORNERS
+///CODE TO SOLVE PROBLEM WITH BALL TRAVELLING ALONG PADDLE WHEN STRUCK AT CERTAIN ANGLES NEAR THE CORNERS
 
 // // left edge
     if(ball.x < paddle.x &&   // if the center of the ball < left-hand edge of paddle and
