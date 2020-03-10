@@ -25,7 +25,7 @@ const ball = {
 // Create paddle properties
 const paddle = {
     x: canvas.width / 2 - 40,       // left-hand side of paddle is half-way across the page minus half the width of the paddle
-    y: canvas.height - 20,          // just off the bottom of the canvas
+    y: canvas.height - 10,          // so the bottom of the paddle is on the bottom of the canvas
     w: 80,
     h: 10,
     speed: 8,
@@ -156,8 +156,31 @@ function moveBall() {
         ball.x < paddle.x + paddle.w &&   // and the center of the ball < right-hand edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
         {
-        ball.dy = -ball.dy           // reverse the speed of the ball
+        ball.dy = -Math.abs(ball.dy)           // reverse the movement of the ball on the y-axis
+                                                // I added Math.abs to solve problem of ball travelling within paddle if hit at certain angles on the edge.
     }
+//////////////////
+///CODE TO TRY AND SOLVE PROBLEM WITH BALL TRAVELLING ALONG PADDLE WHEN STRUCK AT CERTAIN ANGLES NEAR THE CORNERS
+
+// // left edge
+    if(ball.x < paddle.x &&   // if the center of the ball < left-hand edge of paddle and
+        ball.x + ball.radius > paddle.x && //the right hand ege of the ball > left edge of paddle
+        ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
+        {
+        ball.dx = -ball.dx           // reverse the movement of the ball on the x-axis
+    }
+
+// // right edge
+    if(ball.x - ball.radius < paddle.x + paddle.w && // If the left-hand edge of the ball is less than the right edge of the paddle
+        ball.x > paddle.x + paddle.w &&   // and the center of the ball < right-hand edge of paddle
+        ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
+        {
+        ball.dx = -ball.dx           // reverse the movement of the ball on the x-axis
+    }
+
+
+////////////////////////////////////////////////////////
+    
 
     // Brick collision
     bricks.forEach(column => {
@@ -191,7 +214,7 @@ if(ball.y + ball.radius > canvas.height) {
         ball.y = canvas.height - 40;
         //reset paddle position
         paddle.x = canvas.width / 2 - 40;
-        paddle.y = canvas.height - 20;
+        paddle.y = canvas.height - 10;
     }
 }
 }
