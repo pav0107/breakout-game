@@ -14,9 +14,7 @@ const brickColumnCount = 8;     // The number of bricks on each column
 // Create ball properties
 const ball = {
     x: canvas.width / 2, // to start ball in the middle (horizontally) of the page(paddle)
-    y: canvas.height - 40, // most versions of this game have the ball starting on the paddle, so I've made these nearly the same height.
-                            // they're not exactly the same as the ball gets caught in a loop due to code when the ball hits the paddle
-                            // getting the ball reverse the y-direction.
+    y: canvas.height - 15, // most versions of this game have the ball starting on the paddle, so that's what I've done here.
     radius: 10,
     dx: 4,      // change in x-axis every time the ball is redrawn
     dy: -4      // change in y-axis every time the ball is redrawn (negative values are up by default, and that's what we want.)
