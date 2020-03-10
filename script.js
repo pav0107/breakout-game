@@ -208,7 +208,7 @@ if(ball.y + ball.radius > canvas.height) {
     else {
         //reset ball position
         ball.x =  canvas.width / 2;
-        ball.y = canvas.height - 40;
+        ball.y = canvas.height - 15;
         //reset paddle position
         paddle.x = canvas.width / 2 - 40;
         paddle.y = canvas.height - 10;
