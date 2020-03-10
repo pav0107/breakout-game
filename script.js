@@ -159,10 +159,9 @@ function moveBall() {
         ball.dy = -Math.abs(ball.dy)           // reverse the movement of the ball on the y-axis
                                                 // I added Math.abs to solve problem of ball travelling within paddle if hit at certain angles on the edge.
     }
-//////////////////
-///CODE TO SOLVE PROBLEM WITH BALL TRAVELLING ALONG PADDLE WHEN STRUCK AT CERTAIN ANGLES NEAR THE CORNERS
-
-// // left edge
+    
+    
+    // extra detail on ball strike on more of the left edge of paddle
     if(ball.x < paddle.x &&   // if the center of the ball < left-hand edge of paddle and
         ball.x + ball.radius > paddle.x && //the right hand ege of the ball > left edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
@@ -170,7 +169,7 @@ function moveBall() {
         ball.dx = -ball.dx           // reverse the movement of the ball on the x-axis
     }
 
-// // right edge
+    // extra detail on ball strike on more of the right edge of paddle
     if(ball.x - ball.radius < paddle.x + paddle.w && // If the left-hand edge of the ball is less than the right edge of the paddle
         ball.x > paddle.x + paddle.w &&   // and the center of the ball < right-hand edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
