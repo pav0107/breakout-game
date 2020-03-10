@@ -23,7 +23,7 @@ const ball = {
 // Create paddle properties
 const paddle = {
     x: canvas.width / 2 - 40,       // left-hand side of paddle is half-way across the page minus half the width of the paddle
-    y: canvas.height - 10,          // so the bottom of the paddle is on the bottom of the canvas
+    y: canvas.height - 10,          // I wanted the bottom of the paddle on the bottom of the canvas
     w: 80,
     h: 10,
     speed: 8,
@@ -34,10 +34,10 @@ const paddle = {
 const brickInfo = {
     w: 70,
     h: 15,
-    padding: 10,    // creates space around each block, thus between blocks
+    padding: 10,    // creates space around each brick, thus between bricks
     offsetX: 45,    // 45px from left edge of canvas
     offsetY: 60,    //60 px from top edge of canvas
-    visible: true   // initially set to visible, but this will change to false if hit 
+    visible: true   // initially set to visible, but this will later in the code be changed to false if hit 
                     // by the ball, and reset if all the bricks are hit or all the lives are lost.
 }
 
@@ -82,7 +82,7 @@ function drawBricks() {
         column.forEach(brick => {
             ctx.beginPath();
             ctx.rect(brick.x, brick.y, brick.w, brick.h);
-            ctx.fillStyle = brick.visible ? '#FBBC04' : 'transparent';  // colour of brick normally and transparent for when the brick is struck.
+            ctx.fillStyle = brick.visible ? '#FBBC04' : 'transparent';  // colour of brick when visible, then transparent for when the brick is struck.
             ctx.fill();
             ctx.closePath();
         })
@@ -159,7 +159,7 @@ function moveBall() {
     }
     
     
-    // extra detail on ball strike on more of the left edge of paddle
+    // Fine tuning the ball movement if it hits more of the left edge of paddle as opposed to the top edge
     if(ball.x < paddle.x &&   // if the center of the ball < left-hand edge of paddle and
         ball.x + ball.radius > paddle.x && //the right hand ege of the ball > left edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
@@ -167,7 +167,7 @@ function moveBall() {
         ball.dx = -ball.dx           // reverse the movement of the ball on the x-axis
     }
 
-    // extra detail on ball strike on more of the right edge of paddle
+    // Fine tuning the ball movement if it hits more of the right edge of paddle as opposed to the top edge
     if(ball.x - ball.radius < paddle.x + paddle.w && // If the left-hand edge of the ball is less than the right edge of the paddle
         ball.x > paddle.x + paddle.w &&   // and the center of the ball < right-hand edge of paddle
         ball.y + ball.radius > paddle.y)    // and bottom of the ball > top of the paddle i.e. it touches the top of the paddle
@@ -289,7 +289,7 @@ update();
 // Keydown event
 function keyDown(e) {
     if(e.key === 'ArrowRight' || e.key === 'Right') {
-    // Most browsers use ArrowRight and ArrowLeft for the left/right cursor keys, 
+    // Most browsers use ArrowLeft and ArrowRight for the left/right cursor keys, 
     // but IE/Edge browsers use Left and Right so need to include these.
         paddle.dx = paddle.speed;   // move the paddle dx increments in the positive x direction at the speed given earlier.
     } else if(e.key === 'ArrowLeft' || e.key === 'Left') {
