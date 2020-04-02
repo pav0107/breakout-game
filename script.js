@@ -95,15 +95,15 @@ function drawBricks() {
 
 // Draw score on canvas
 function drawScore() {
-    ctx.font = '20px Roboto';   // I chose another font Google used for this
-    ctx.fillStyle = "#EA4335";  // Google's red
+    ctx.font = '20px Roboto';
+    ctx.fillStyle = "#000";
     ctx.fillText(`Score: ${score}`, canvas.width - 200, 35) // I chose this position by playing around.
 }
 
 // Draw lives on canvas
 function drawLives() {
     ctx.font = '20px Roboto';
-    ctx.fillStyle = "#34A853";  // Google's green
+    ctx.fillStyle = "#000";
     ctx.fillText(`Lives: ${lives}`, canvas.width - 100, 35);
     
 }
