@@ -1,6 +1,8 @@
-In this GitHub repository, you'll find the index.html, style.css and script.js files you'll need to build this Breakout game.
+# Breakout game
 
-To play it on your browser, please download all the files to your computer then drag the index.html file to your browser.
+[Click here](https://pav0107.github.io/breakout-game/) to play the game.
+
+This game is written in JavaScript and uses HTML Canvas.
 
 Here's the general setup of the game:
 - The  game has a single screen with 8 rows of bricks, a paddle, and a ball. 
